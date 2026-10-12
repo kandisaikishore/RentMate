@@ -1,5 +1,10 @@
 # RentMate
 
+## Live Demo / Deployment URL
+
+**Deployment URL:** Not verified yet. Add the confirmed public application URL here after checking the live service. The GitHub repository link is not a deployment URL.
+
+
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?logo=github)](https://github.com/saikishore2410/RentMate) [![Issues](https://img.shields.io/github/issues/saikishore2410/RentMate)](https://github.com/saikishore2410/RentMate/issues) [![Last Commit](https://img.shields.io/github/last-commit/saikishore2410/RentMate)](https://github.com/saikishore2410/RentMate/commits/main)
 
 > A rental-workflow application project. See the source for the exact roles, property features, and integrations currently implemented.
