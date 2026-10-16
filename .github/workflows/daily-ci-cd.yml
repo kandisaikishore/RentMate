@@ -101,16 +101,22 @@ jobs:
                 npm install --global pnpm
                 pnpm install --frozen-lockfile --config.dangerouslyAllowAllBuilds=true
                 PM=pnpm
+              elif [[ -f bun.lock || -f bun.lockb ]]; then
+                bun install --frozen-lockfile || {
+                  echo "::warning::Bun lockfile is stale; refreshing dependencies for verification."
+                  bun install
+                }
+                PM=bun
               elif [[ -f yarn.lock ]]; then
                 corepack enable
                 yarn install --immutable
                 PM=yarn
               elif [[ -f package-lock.json || -f npm-shrinkwrap.json ]]; then
-                npm install --no-audit --no-fund
+                npm ci || npm ci --legacy-peer-deps
                 PM=npm
               else
-                npm install
-                PM=npm
+                pnpm install --no-frozen-lockfile
+                PM=pnpm
               fi
               has_test="$(node -e "const s=require('./package.json').scripts||{};process.stdout.write(s.test?'yes':'no')")"
               has_lint="$(node -e "const s=require('./package.json').scripts||{};process.stdout.write(s.lint?'yes':'no')")"
