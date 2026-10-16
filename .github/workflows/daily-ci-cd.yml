@@ -41,6 +41,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: "10"
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -109,7 +116,7 @@ jobs:
               has_lint="$(node -e "const s=require('./package.json').scripts||{};process.stdout.write(s.lint?'yes':'no')")"
               has_build="$(node -e "const s=require('./package.json').scripts||{};process.stdout.write(s.build?'yes':'no')")"
               ran=0
-              if [[ "$has_test" == yes ]]; then "$PM" test; ran=1; fi
+              if [[ "$has_test" == yes ]]; then "$PM" run test; ran=1; fi
               if [[ "$has_lint" == yes ]]; then "$PM" run lint; ran=1; fi
               if [[ "$has_build" == yes ]]; then "$PM" run build; ran=1; fi
               if [[ "$ran" == 0 ]]; then
